@@ -1,0 +1,1893 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Elf Web Slides</title>
+
+		<link rel="stylesheet" href="./dist/reveal.css">
+		<link rel="stylesheet" href="./dist/theme/elfstyle.css" id="theme">
+
+        <link rel="stylesheet" href="./plugin/highlight/monokai.css">
+        <link rel="stylesheet" href="./plugin/pointer/pointer.css" />
+        <link rel="stylesheet" href="./css/fontawesome-free-7.0.1-web/css/all.css">
+
+        <style>
+            q {
+              font-style: normal !important;
+            }
+
+            .katex { font-size: 1em !important; } 
+        </style>
+
+        <style>
+            .animation-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 1rem;
+                font-family: sans-serif;
+            }
+            .svg-wrapper {
+                width: 450px;
+                height: 400px;
+                position: relative;
+            }
+            #function-space-svg {
+            width: 100%;
+            height: 100%;
+            }
+            .anim-controls {
+                margin-top: 1rem;
+            }
+            .anim-control-btn {
+                margin: 0 0.5rem;
+                padding: 0.75rem 1.25rem;
+                font-size: 1rem;
+                cursor: pointer;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
+            }
+            .anim-control-btn:hover {
+                background-color: #e0e0e0;
+            }
+            #animated-shape {
+                transform-origin: center;
+                transition: d 0.8s ease-in-out, transform 0.8s ease-in-out;
+            }
+        </style>
+
+        <style>
+        @font-face {
+        font-family: "Font Awesome 7 Free";
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-regular-400.woff2");
+        }
+        @font-face {
+        font-family: "Font Awesome 7 Free";
+        font-style: normal;
+        font-weight: 900;
+        font-display: block;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-solid-900.woff2");
+        }
+        @font-face {
+        font-family: "Font Awesome 5 Brands";
+        font-display: block;
+        font-weight: 400;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-brands-400.woff2") format("woff2");
+        }
+        @font-face {
+        font-family: "Font Awesome 5 Free";
+        font-display: block;
+        font-weight: 900;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-solid-900.woff2") format("woff2");
+        }
+        @font-face {
+        font-family: "Font Awesome 5 Free";
+        font-display: block;
+        font-weight: 400;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-regular-400.woff2") format("woff2");
+        }@font-face {
+        font-family: "FontAwesome";
+        font-display: block;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-solid-900.woff2") format("woff2");
+        }
+        @font-face {
+        font-family: "FontAwesome";
+        font-display: block;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-brands-400.woff2") format("woff2");
+        }
+        @font-face {
+        font-family: "FontAwesome";
+        font-display: block;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-regular-400.woff2") format("woff2");
+        unicode-range: U+F003, U+F006, U+F014, U+F016-F017, U+F01A-F01B, U+F01D, U+F022, U+F03E, U+F044, U+F046, U+F05C-F05D, U+F06E, U+F070, U+F087-F088, U+F08A, U+F094, U+F096-F097, U+F09D, U+F0A0, U+F0A2, U+F0A4-F0A7, U+F0C5, U+F0C7, U+F0E5-F0E6, U+F0EB, U+F0F6-F0F8, U+F10C, U+F114-F115, U+F118-F11A, U+F11C-F11D, U+F133, U+F147, U+F14E, U+F150-F152, U+F185-F186, U+F18E, U+F190-F192, U+F196, U+F1C1-F1C9, U+F1D9, U+F1DB, U+F1E3, U+F1EA, U+F1F7, U+F1F9, U+F20A, U+F247-F248, U+F24A, U+F24D, U+F255-F25B, U+F25D, U+F271-F274, U+F278, U+F27B, U+F28C, U+F28E, U+F29C, U+F2B5, U+F2B7, U+F2BA, U+F2BC, U+F2BE, U+F2C0-F2C1, U+F2C3, U+F2D0, U+F2D2, U+F2D4, U+F2DC;
+        }
+        @font-face {
+        font-family: "FontAwesome";
+        font-display: block;
+        src: url("./css/fontawesome-free-7.0.1-web/webfonts/fa-v4compatibility.woff2") format("woff2");
+        unicode-range: U+F041, U+F047, U+F065-F066, U+F07D-F07E, U+F080, U+F08B, U+F08E, U+F090, U+F09A, U+F0AC, U+F0AE, U+F0B2, U+F0D0, U+F0D6, U+F0E4, U+F0EC, U+F10A-F10B, U+F123, U+F13E, U+F148-F149, U+F14C, U+F156, U+F15E, U+F160-F161, U+F163, U+F175-F178, U+F195, U+F1F8, U+F219, U+F27A;
+        }
+        </style>
+	</head>
+
+	<body>
+        <div class="triangle-left"></div>
+        <div class="triangle-right"></div>
+        <div class="triangle-right2"></div>
+        <div class="triangle-up-right"></div>
+		<div class="reveal">
+			<div class="slides">
+                <section data-markdown class="noslidenumber" data-visibility="uncounted">
+                    <script type="text/template">
+                        ### A Study on Forecasting Frameworks for Fault-Agnostic Earthquake Forecasting and its Applications in the Discovery of Correlated Auxiliary Variables
+
+                        ### Junqueira Saldanha, Matheus Henrique
+
+                        Degree Programs in Systems and Information Engineering
+                        <br>
+                        Graduate School of Science and Technology
+                        <br>
+                        Doctoral Program in Computer Science
+
+                        #### Supervisor: Hirata, Yoshito
+                        <br>
+                        October, 2025
+                        <br><br><br><br>
+                    </script>
+                </section>
+
+                <section>
+                    <div class="toc"></div>
+                </section>
+
+                <section data-section="Introduction" data-notoc>
+                    
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 60%; text-align: left;">
+                            <h1>Introduction</h1>
+                            <ul>
+                                <li>Seismic hazards cause numerous deaths and huge financial losses.</li>
+                                <li>Earthquake forecasting is known to be extremely difficult.</li>
+                                <li>Often seen as <q>elusive and perhaps impossible.</q><span class="footfullcite">beroza2021machine</span></li>
+                            </ul>
+                            <ul class="fragment">
+                                <li>The mechanisms that lead to earthquakes are not sufficiently well known.<span class="footfullcite">stein2003introduction</span></li>
+                                <li>Mantle convection plays a major role in the movement of tectonic plates.</li>
+                                <li>Convection causes elastic energy to build up on the faults.</li>
+                            </ul>
+                            <ul class="fragment">
+                                <li>Elastic-rebound theory:
+                                    <ul>
+                                        <li>Relative plate movement occurs until it is <em>locked</em>.</li>
+                                        <li>Elastic strain energy then builds up on the fault.</li>
+                                        <li>Eventually a <em>fracture</em> occurs, which can result in an earthquake.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%;">
+                            <img src="Earthquake_cycle_for_megathrust_earthquake-1.svg">
+                            <img class="fragment" src="Earthquake_cycle_for_megathrust_earthquake-2.svg">
+                            <small><i>Adapted from the original. Original by Xiaohan Song.</i></small>
+                        </div>
+                    </div>
+                    
+                </section>
+
+                <section data-markdown><script type="text/template">
+                    <ul>
+                        <li>Two main ways to perform forecasting:
+                            <ol>
+                                <li>Using domain- and location-specific knowledge
+                                    <ul class="fragment">
+                                        <li>datasets containing aftershock-mainshock pairs <span class='footfullcite'>devries2018deep</span></li>
+                                        <li>considers the particular fault geometry</li>
+                                        <p>❌ specific to one region; low availability of appropriate datasets; requires oversight by a seismology expert</p>
+                                    </ul>                                    
+                                </li>
+                                <li>Without using specific knowledge
+                                    <ul class="fragment">
+                                        <li>relies on datasets containing timestamp, magnitude, depth, latitude, longitude</li>
+                                        <li>datasets available for various regions</li>
+                                        <li>simpler to include other kinds of non-location-specific data (i.e., precursor data)</li>
+                                        <p>❌ ignores useful information that could help forecasting</p>
+                                        <p>❓ What is the best we can do with just such information?</p>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </script></section>
+
+                <section data-markdown data-section="Methods" data-subsection="Data Analyzed" style="font-size: 22px;"><script type="text/template">
+                    # Data Analyzed
+                    
+                    <div class="container">
+                        <div class="col"><img src="japan-earthquakes.png"></div>
+                        <div class="col"><img src="newzealand-earthquakes.png"></div>
+                        <div class="col"><img src="greece-earthquakes.png"></div>
+                    </div>
+
+                    - Three regions were chosen for analysis:
+                        - **Japan countrywide** (Japanese Meteorological Agency, [https://www.data.jma.go.jp](https://www.data.jma.go.jp))
+                        - **New Zealand** (GeoNet project, [https://www.geonet.org.nz/](https://www.geonet.org.nz/))
+                        - **Balkan peninsula** (University of Athens, [http://www.geophysics.geol.uoa.gr/](http://www.geophysics.geol.uoa.gr/))
+                    - Of these, some subregions of interest were also analysed separately:
+                        - **Tōhoku region**, in Japan
+                        - Surroundings of **Wellington**, in New Zealand
+                        - Surroundings of **Stylida**, in Greece
+                    - Some analyses make use of a **Worldwide** earthquakes catalog (United States Geological Survey, [https://earthquake.usgs.gov/earthquakes/search/](https://earthquake.usgs.gov/earthquakes/search/))
+                </script></section>
+
+                <section data-subsection="Edit Distances" style="text-align: left;">
+                    <h1>Edit Distances</h1>
+
+                    <ul>
+                        <li>
+                            Let \(P_1\) and \(P_2\) be two marked point processes:
+                            $$
+                                P_1 = \{ (t_i, \vec{u}_i) \mid 1 \le i \le N_1 \} \quad\quad
+                                P_2 = \{ (s_j, \vec{v}_j) \mid 1 \le j \le N_2 \}
+                            $$
+                        </li>
+                        <li>The idea is to transform \(P_1\) into \(P_2\) using primitive operations, each incurring a cost.</li>
+                        <li class="fragment">
+                            The primitive operations are:
+                            <ul>
+                                <li><strong>Insertion</strong>: insert point \((s_j, \vec{v}_j)\) from \(P_2\) into \(P_1\), paying a cost of 1.</li>
+                                <li><strong>Deletion</strong>: remove point \((t_i, \vec{u}_i)\) from \(P_1\), paying a cost of 1.</li>
+                                <li>
+                                    <strong>Shifting</strong>: replace point \((t_i, \vec{u}_i)\) in \(P_1\) by the point \((s_j, \vec{v}_j)\) from \(P_2\), paying a cost of:
+                                    $$
+                                    C\big((t_i, \vec{u}_i), (s_j, \vec{v}_j)\big) = \lambda_0 |t_i - s_j| + \sum_{k=1}^{d} \lambda_k \big| \vec{u}_i(k) - \vec{v}_j(k) \big|
+                                    $$ 
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">The \(\lambda_k\) are user-defined normalizing constants intended to ensure that the different marks have comparable orders of magnitude.</li>
+                        <li class="fragment">The <strong>edit distance</strong> is defined as the lowest possible cost necessary to transform \(P_1\) into \(P_2\).</li>
+                    </ul>
+                </section>
+
+                <section data-transition="none" class="noslidenumber">
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 70%;">
+                            <iframe src="edit-distances1-1.svg" frameborder="0" width="800" height="250"></iframe>
+                            <iframe src="edit-distances2-1.svg" frameborder="0" width="800" height="350"></iframe>
+                        </div>
+                        <div class="col" style="flex: 0 0 30%;">
+                        </div>
+                    </div>
+
+                    <!-- <svg
+                        width="120"
+                        height="120"
+                        viewBox="0 0 120 120"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="60,30 90,90 30,90">
+                            <animateTransform
+                            attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            from="0 60 70"
+                            to="360 60 70"
+                            dur="10s"
+                            repeatCount="indefinite" />
+                        </polygon>
+                    </svg> -->
+                </section>
+
+                <section data-transition="none" class="noslidenumber" data-visibility="uncounted">
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 60%;">
+                            <iframe src="edit-distances-arrows.svg" frameborder="0" width="800" height="600"></iframe>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%;">
+                        </div>
+                    </div>                    
+                </section>
+
+                <section data-transition="none" class="noslidenumber" data-visibility="uncounted">
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 60%;">
+                            <iframe src="edit-distances1-1.svg" frameborder="0" width="800" height="250"></iframe>
+                            <iframe src="edit-distances2-1.svg" frameborder="0" width="800" height="350"></iframe>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%;">
+                            <ul>
+                                <li>Shift cost:</li>
+                                $$
+                                    \lambda_0 |t_i - s_j| + \sum_{k=1}^{d} \lambda_k \big| \vec{u}_i(k) - \vec{v}_j(k) \big|
+                                $$
+
+                                <li>i.e. the <i>effort</i> to move the circle to its final position</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-transition="none" class="noslidenumber" data-visibility="uncounted">
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 60%;">
+                            <iframe src="edit-distances1-2.svg" frameborder="0" width="800" height="250"></iframe>
+                            <iframe src="edit-distances2-1.svg" frameborder="0" width="800" height="350"></iframe>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%;">
+                        </div>
+                    </div>
+                </section>
+
+                <section data-transition="none" class="noslidenumber" data-visibility="uncounted">
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 60%;">
+                            <iframe src="edit-distances1-3.svg" frameborder="0" width="800" height="250"></iframe>
+                            <iframe src="edit-distances2-2.svg" frameborder="0" width="800" height="350"></iframe>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%; text-align: left;">
+                            <ul>
+                                <li><span style="color: #FF6666">Deletion</span> cost: 1 (per node)</li>
+                                <li><span style="color: #009191">Insertion</span> cost: 1 (per node)</li>
+                            </ul>
+
+                            <ul style="margin-top: 3em;">
+                                <li>Number of operations:
+                                    <ul>
+                                        <li>Shifting: 7</li>
+                                        <li>Deletion: 2</li>
+                                        <li>Insertion: 2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-subsection="Radial Basis Functions">
+                    <h1>Radial Basis Functions</h1>
+
+                    <ul>
+                        <li>We use these edit distances with Radial Basis Functions (RBFs) for performing the forecasting.</li>
+                        <li>Simply put, it finds a functional relation of the form:
+                            $$
+                            \hat{y}(\vec{x}, \vec{w}) = w_0 + \sum_{i = 1}^{k} w_i \, \psi\big(d_H(\vec{x}, \vec{c}_i)\big)
+                            $$
+                        </li>
+                        <li>Where:</li>
+                        <ul>
+                            <li>$\vec{x}$: the point process (e.g., the set of earthquakes in a week) for which we want to make a prediction.</li>
+                            <li>$\vec{c}_i$: point processes taken from the training set, which will be compared with $\vec{x}$.</li>
+                            <ul>
+                                <li>We take $100$ randomly chosen instances $\vec{c}_i$ from the training set.</li>
+                            </ul>
+                            <li>$w_i$: adjustable parameters found by least squares.</li>
+                            <li>$\psi$: taken to be the Gaussian kernel, $\psi(x) = \exp(-x^{2} / \epsilon)$.</li>
+                        </ul>
+                        <li>We predict the logarithm of the number of earthquakes, $\log(N + 1)$, in a certain day.</li>
+                        <li>The predicted values of $\log(N + 1)$ are then correlated with the maximum magnitude by means of Gutenberg-Richter's law.<span class="footfullcite">stein2003introduction</span></li>
+                    </ul>                  
+                </section>
+
+                <!-- <section data-subsection="Dynamical Systems">
+                    <h1>Dynamical Systems</h1>
+
+
+                </section> -->
+
+                <!-- Slide 1: Intro to Dynamical Systems -->
+                <section data-subsection="Dynamical Systems">
+                    <h3>Dynamical Systems: A Brief Introduction</h3>
+                    <ul>
+                        <li>A dynamical system is simply a system whose state evolves over time according to a fixed rule.</li>
+                        <li>Core Components:
+                            <ul>
+                                <li><b>State:</b> A snapshot of the system at a specific time (e.g., position and velocity of a pendulum).</li>
+                                <li><b>State Space:</b> The set of all possible states the system can be in.</li>
+                                <li><b>Evolution Rule:</b> A mathematical rule ($f$) that describes how the state $x$ changes over time. $x_{t+1} = f(x_t)$</li>
+                            </ul>
+                        </li>
+                        <li>Common examples include planetary orbits, weather patterns, and population dynamics.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Example: Lorenz System</h3>
+
+                    <div class="container">
+                        <div class="col">
+                            <ul>
+                                <li>The system of ordinary differential equations:</li>
+                            </ul>
+                            $$
+                            \begin{aligned}
+                            \dot{x} & = \sigma(y-x) \\
+                            \dot{y} & = \rho x - y - xz \\
+                            \dot{z} & = -\beta z + xy
+                            \end{aligned}
+                            $$
+                        </div>
+                        <div class="col">
+                            <div id="lorenzGraph" style="margin: 0 auto; width: 600px;"></div>
+                            <button onclick="lorenzStart();">Start</button>
+                            <button onclick="lorenzStop = true;">Stop</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Example: Hénon Map</h3>
+
+                    <div class="container">
+                        <div class="col">
+                            <ul>
+                                <li>The map function:</li>
+                            </ul>
+                            $$
+                            \begin{aligned}
+                            x_{n+1} &= 1 - ax_n^2 + y_n \\
+                            y_{n+1} &= bx_n
+                            \end{aligned}
+                            $$
+                        </div>
+                        <div class="col">
+                            <div id="henonGraph" style="margin: 0 auto; width: 600px;"></div>
+                            <button onclick="henonStart();">Start</button>
+                            <button onclick="henonStop = true;">Stop</button>
+                            <button onclick="henonSleep = 0;">Fast</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Analyzing Dynamical Systems -->
+                <section>
+                    <ul>
+                        <li>Numerous dynamical systems <i>could</i> be involved in the earthquake generating process.</li>
+                        <li>One example are the convection flows within the Earth's mantle (Navier-Stokes equations).</li>
+                        <li>The figure below shows an exaggerated diagram.</li>
+                    </ul>
+
+                    <img src="Oceanic_spreading.svg" width="50%"> <br>
+                    <small><i>Figure author: Surachit</i></small>
+                    <!-- <div class="container">
+                        <div class="col" style="flex: 0 0 60%;">
+                            <ul>
+                                <li>Our goal is to understand the system's behavior over time.</li>
+                                <li>Key questions we ask:
+                                    <ul>
+                                        <li>Can we predict its future state?</li>
+                                        <li>What are its long-term tendencies (e.g., stability, attractors)?</li>
+                                        <li>Does it exhibit periodic or chaotic behavior?</li>
+                                    </ul>
+                                </li>
+                                <li style="margin-top:1em;">In this work, we analyze the Sun and Earth's seismic activity as two <strong>coupled dynamical systems</strong> to understand how one influences the other.</li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%;">
+                            <img src="./images/lorenz_attractor.png" alt="Lorenz Attractor" style="width: 100%; background-color: white; border-radius: 8px;">
+                            <p style="font-size: 0.6em; text-align: center;">The Lorenz Attractor: an example of a chaotic dynamical system.</p>
+                        </div>
+                    </div> -->
+                </section>
+
+                <section data-auto-animate data-subsection="Coupling Detection Methods">
+                    <h1>Coupling Detection Methods</h1>
+
+                    <ul>
+                        <li>One dynamical system can have a strong influence in another (<strong>coupling</strong>).</li>
+                        <li> To measure coupling, we use two methods:</li>
+                        <ul>
+                            <li>Hirata et al. (2016)<span class="footfullcite">hirata2016plosone</span></li>
+                            <li>Andrzejak et al. (2011)<span class="footfullcite">andrzejak2011characterizing</span></li>
+                        </ul>
+                        <li>They both rely on the same basic idea:<span class="footfullcite">stark1999</span></li>
+                        <ul>
+                            <li>Measure systems $X$ and $Y$ at times $t_0$ and $t_1$, observing $s_X^{t_0}$, $s_X^{t_1}$, $s_Y^{t_0}$ and $s_Y^{t_1}$</li>
+                            <li>$s_Y^{t_0}$ and $s_Y^{t_1}$ are similar $\overset{\text{?}}{\Rightarrow}$ $s_X^{t_0}$ and $s_X^{t_1}$ are also similar</li>
+                            <li>Then we say system $X$ drives system $Y$</li>
+                        </ul>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <ul>
+                        <ul>
+                            <li>Measure systems $X$ and $Y$ at times $t_0$ and $t_1$, observing $s_X^{t_0}$, $s_X^{t_1}$, $s_Y^{t_0}$ and $s_Y^{t_1}$</li>
+                            <li>$s_Y^{t_0}$ and $s_Y^{t_1}$ are similar $\overset{\text{?}}{\Rightarrow}$ $s_X^{t_0}$ and $s_X^{t_1}$ are also similar</li>
+                            <li>Then we say system $X$ drives system $Y$</li>
+                        </ul>
+                    </ul>
+                    <div class="r-stack">
+                        <img src="images/coupling_detection.png" style="width: 70%;">
+                        <img class="fragment" src="images/coupling_detection_arrows.png" style="width: 70%;">
+                    </div>
+                </section>
+
+                <section data-auto-animate data-section="Effects of Lunar and Solar Tidal Forces" style="text-align: left;">
+                    <h1>Effects of Lunar and Solar Tidal Forces</h1>
+
+                    <ul>
+                        <li>In the master's dissertation, the prediction framework was proposed and the connection between Sun &amp; earthquakes was analyzed.</li>
+                        <li>Here we continue the line of investigation on external factors that affect earthquakes (or not)</li>
+                    </ul>
+                    <ul>
+                        <li>The difficulty of earthquake forecasting is aggravated by the fact that:</li>
+                        <ul>
+                            <li>we cannot yet enumerate all the external factors influencing earthquakes</li>
+                            <li>or the degree of importance of each of these factors</li>
+                        </ul>
+                    </ul>
+                    <ul>
+                        <li>Thus, it is essential to make an effort to identify and quantify these external factors</li>
+                        <li>We began by analyzing tidal forces from the Sun and the Moon</li>
+                    </ul>
+
+                    <div style="text-align: center;">
+                        <img src="./images/sun-earth-moon-horizontal.png" style="width: 50%;">
+                    </div>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <ul>
+                        <li>The influence of tidal forces has been investigated in the literature <span class='footfullcite'>ide2016naturegeoscience</span><span class='footfullcite'>hao2019evidence</span></li>
+                        <li>However, either:</li>
+                        <ul>
+                            <li>they analyze only correlation, without assessing its applicability in prediction;</li>
+                            <li>or they perform predictions for larger time frames (above 15 days)</li>
+                            <li>+ the prediction frameworks used are different than ours</li>
+                        </ul>
+                    </ul>
+                    <div class="container">
+                        <div class="col fragment" style="flex: 0 0 40%;">
+                            <ul>
+                                <li>Tidal forces are theorized to influence earthquakes due to its ability to deform the continental crust</li>
+                                <li>This could play a significant role in the rate of elastic strain energy accumulation in faults</li>
+                                <li>Most importantly, it could be a significant agent that causes the initial crack (nucleation) that develops into an earthquake</li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 60%;">
+                            <img src="./images/sun-earth-moon-horizontal.png" width="100%;">
+                        </div>
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <ul>
+                        <li>We simulated the trajectories of the Sun and Moon using the Python library Astropy.</li>
+                        <li>With this we could calculate:</li>
+                        <ul>
+                            <li>hourly differential pulls on each region</li>
+                            <li>differential pull at the place and time of each earthquake in our catalogs</li>
+                        </ul>
+                    </ul>
+                    <ul>
+                        <li>To include sunspot and Moon tidal force data into the above framework, we modify our framework as follows:</li>
+                        $$
+                            \hat{z}(\vec{x}, \vec{y}^{(1)}, \vec{y}^{(2)}, \vec{w}) = w_0 + \sum_{i = 1}^k \bigg[ w_i \, \psi\big( d_X(\vec{x}, \vec{c}_i) + \kappa_1 d_E(\vec{y}^{(1)}, \vec{y}^{(1)}_{\vec{c}_i}) + \kappa_2 d_E(\vec{y}^{(2)}, \vec{y}^{(2)}_{\vec{c}_i}) \big)  \bigg],
+                        $$
+                        <li>Where:</li>
+                        <ul>
+                            <li>$\vec{y}^{(1)}$: vector containing the 7 sunspot numbers referring to the same week as $\vec{x}$</li>
+                            <li>$\vec{y}^{(1)}_{\vec{c}_i}$: same as above, but referring to the same week as $\vec{c}_i$;</li>
+                            <li>$\vec{y}^{(2)}$: the $168$-dimensional vector containing the hourly tidal force collected over the 7-day window</li>
+                            <li>$d_E()$: the Euclidean distance</li>
+                        </ul>
+                    </ul>
+                </section>
+
+                <!-- <section>
+                    <ul>
+                        <li>Differential pull was calculated as the relative acceleration of an object at that position as observed from the Earth's center.</li>
+                        $$
+                        \begin{align*}
+                            a_M' - a_M &\approx G m_M \frac{d_M}{d_M^4} \frac{2 r_E}{1} \\
+                            &= \frac{2 G m_M r_E}{d_M^3},
+                        \end{align*}
+                        $$
+                    </ul>
+                </section> -->
+
+                <section>
+                    <h3>Tidal Force Calculation: Differential Pull</h3>
+                    <ul>
+                        <li>What is commonly called <q>tidal force</q> is more accurately a <strong>differential pull</strong>.</li>
+                        <li>It arises because the Moon's gravitational pull has varying intensity across the Earth's diameter.</li>
+                        <li>The approximate differential pull on an object at the Earth's surface is given by:<span class='footfullcite'>sawicki1999myths</span>
+                            $$ \frac{2 G m_M r_E}{d_M^3} $$
+                        </li>
+                        <li>A similar effect occurs on both the near and far sides of the Earth.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Calculation Methodology</h3>
+                    <ul>
+                        <li>We calculated differential pulls at hourly intervals for all earthquake catalogs.</li>
+                        <li>Instead of using analytical models,<span class='footfullcite'>agnew2005earth</span><span class='footfullcite'>longman1959formulas</span> we used high-accuracy historical positions of the Earth, Sun, and Moon from the <strong>Astropy</strong> library.</li>
+                        <li>This approach is preferable as it inherently accounts for:
+                            <ul>
+                                <li>Variability in the Moon's sidereal period (~3.5 hours).</li>
+                                <li>Complex gravitational interactions from other celestial bodies.</li>
+                            </ul>
+                        </li>
+                        <li>Astropy can also provide accurate trajectory estimations for the near-future forecasting required by our model.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Results: Moon's Influence on Earthquakes</h3>
+                    <ul>
+                        <li>Our work focuses on detecting <strong>causality</strong>, not just correlation.<span class='footfullcite'>san2014unraveling</span></li>
+                        <li>We investigated two main questions:
+                            <ol>
+                                <li>Is there a causal link from lunar effects to earthquakes?</li>
+                                <li>Can tidal forces data improve earthquake forecasting accuracy?</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Causality: Andrzejak et al. Method<span class='footfullcite'>andrzejak2011characterizing</span></h3>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 55%;">
+                            <ul>
+                                <li>Found evidence of Moon influencing earthquakes ($Y \rightarrow X$).</li>
+                                <li>Coupling measure $|L(Y \rightarrow X)| \gg |L(X \rightarrow Y)|$.</li>
+                                <li>Histograms for $L(Y \rightarrow X)$ (left) show irregular, slanted distributions, indicating coupling.</li>
+                                <li>Histograms for $L(X \rightarrow Y)$ (right) are nearly uniform, indicating no coupling.</li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 45%;">
+                            <img src="./images/coupling-hist-newzealand.png" alt="Histogram for New Zealand coupling test">
+                            <img src="./images/coupling-hist-balkan.png" alt="Histogram for Balkan region coupling test">
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Causality: Hirata et al. Method<span class='footfullcite'>hirata2016plosone</span></h3>
+                    <ul>
+                        <li>Unidirectional coupling was also identified using this method.</li>
+                        <li>Generally, $p$-values for the Moon-to-earthquake ($Y \rightarrow X$) direction were much smaller than for the reverse direction.</li>
+                        <li><strong>Exception:</strong> The Japan catalog, where the relation was inverted, possibly due to stochastic factors.</li>
+                        <li><strong>Overall Conclusion:</strong> The collective results from both methods provide evidence for a causal coupling from the Moon to earthquakes.</li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Correlation: Tidal Force vs. Magnitude</h3>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 50%;">
+                            <ul>
+                                <li>We also investigated the direct relationship between differential pull and earthquake magnitude.</li>
+                                <li>This analysis focuses on <strong>correlation</strong> to corroborate the causality findings.</li>
+                                <li>We calculated the average differential pull for earthquakes with magnitude $\ge m$, for various values of threshold $m$.</li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 50%;">
+                            <img src="images/diff-pull-per-mag-threshold.png" alt="Chart showing average differential pull increases with earthquake magnitude threshold">
+                        </div>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Correlation Findings</h3>
+                    <ul>
+                        <li><strong>Clear Trend:</strong> The average differential pull increases with the magnitude threshold across all catalogs.</li>
+                        <li>This indicates a tendency for larger-magnitude earthquakes to occur during periods of higher tidal force.</li>
+                        <li><strong>However, the trend is moderate:</strong>
+                            <ul>
+                                <li>The increase is only 9.3% to 31.1% over the overall mean pull.</li>
+                                <li>Major earthquakes do <strong>not</strong> occur exclusively at moments of peak tidal force.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Main Finding:</strong> A persistent positive correlation exists between lunar tidal force and earthquake magnitudes.</li>
+                    </ul>
+                    
+                    <img src="images/diff-pull-per-mag-threshold.png" alt="Chart showing average differential pull increases with earthquake magnitude threshold" width="45%;">
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Correlation: Hypothesis Testing</h3>
+                    <ul>
+                        <li>Compared differential pulls of the 20% lowest magnitude earthquakes against those above various higher thresholds (e.g., >5, >5.5, >6).</li>
+                        <li>Used a <strong>Wilcoxon rank-sum test</strong> to compare the median differential pulls of these two groups.</li>
+                        <li>Alternative Hypothesis: "Earthquakes with larger magnitudes have larger differential pulls."</li>
+                        <li><strong>Result:</strong> The null hypothesis was rejected in over two-thirds of the cases (at a 5% significance level).</li>
+                        <li>This further supports that larger differential pulls are associated with larger-magnitude earthquakes.</li>
+                    </ul>
+
+                    <img src="images/diff-pull-per-mag-threshold.png" alt="Chart showing average differential pull increases with earthquake magnitude threshold" width="55%;">
+                </section>
+
+                <section>
+                    <h3>Improving Forecasting Accuracy</h3>
+                    <ul>
+                        <li><strong>Goal:</strong> Verify if Sun (sunspots) and Moon (differential pulls) data improve forecasting accuracy.</li>
+                        <li><strong>Method:</strong>
+                            <ul>
+                                <li>Forecast the log-number of earthquakes: $\log(N+1)$.</li>
+                                <li>This is then correlated with maximum magnitudes (Gutenberg-Richter law).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Accuracy Metrics:</strong>
+                            <ul>
+                                <li>Correlation</li>
+                                <li>Odds-Ratio (balances true/false positives)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <img src="images/example-predictions.png" alt="Example predictions for New Zealand, showing correlation between predicted log-number of earthquakes and real magnitudes." width="60%">
+                    <p style="font-size: 0.6em; text-align: center; margin: 0; font-style: italic;">Example forecasts for New Zealand</p>
+                </section>
+
+                <section>
+                    <h3>Forecasting Results: Japan</h3>
+                    <div class="container">
+                        <div class="col">
+                            <strong>Japan (Nationwide)</strong>
+                            <div class="container">
+                                <div class="col"><img src="images/japan-correlation.png" alt="Boxplot of correlation for Japan nationwide predictions."></div>
+                                <div class="col"><img src="images/japan-odds.png" alt="Boxplot of odds-ratio for Japan nationwide predictions."></div>
+                            </div>
+                            <ul>
+                                <li>Moon data slightly improves correlation.</li>
+                                <li>Best correlation gain (<strong>+5.37%</strong>) with Moon + Sun data.</li>
+                                <li>Odds-ratio only improves (<strong>+3.51%</strong>) when both are combined.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <strong>Touhoku Region</strong>
+                            <div class="container">
+                                <div class="col"><img src="images/touhoku-correlation.png" alt="Boxplot of correlation for Touhoku region predictions."></div>
+                                <div class="col"><img src="images/touhoku-odds.png" alt="Boxplot of odds-ratio for Touhoku region predictions."></div>
+                            </div>
+                            <ul>
+                                <li>Higher baseline accuracy.</li>
+                                <li>Significant accuracy gains.</li>
+                                <li>Correlation up to <strong>+29.62%</strong>.</li>
+                                <li>Odds-ratio up to <strong>+76.63%</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Forecasting Results: New Zealand & Balkan Region</h3>
+                    <div class="container">
+                        <div class="col">
+                            <strong>New Zealand</strong>
+                            <div class="container">
+                                <div class="col"><img src="images/newzealand-correlation.png" alt="Boxplot of correlation for New Zealand predictions."></div>
+                                <div class="col"><img src="images/newzealand-odds.png" alt="Boxplot of odds-ratio for New Zealand predictions."></div>
+                            </div>
+                            <ul>
+                                <li>Sunspot data most relevant for correlation (<strong>+8.86%</strong>).</li>
+                                <li>Combined data yielded best odds-ratio (<strong>+5.72%</strong>).</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <strong>Balkan Region</strong>
+                            <div class="container">
+                                <div class="col"><img src="images/greece-correlation.png" alt="Boxplot of correlation for Balkan region predictions."></div>
+                                <div class="col"><img src="images/west-greece-odds.png" alt="Boxplot of odds-ratio for West Balkan subregion predictions."></div>
+                            </div>
+                            <ul>
+                                <li>Smaller subregion yielded higher correlations.</li>
+                                <li>Substantial increases in both metrics from Sun or Moon data.</li>
+                                <li>The highest accuracy is achieved when all data types were used simultaneously.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Conclusion: Summary of Findings</h3>
+                    <ul>
+                        <li>Presented significant evidence that seismic activity is influenced by tidal forces from the Sun and the Moon.</li>
+                        <li><strong>Moon's Influence:</strong>
+                            <ul>
+                                <li>Established a <strong>unidirectional causal link</strong> (Moon's motion drives earthquakes).</li>
+                                <li>Found a slight-to-moderate tendency for larger earthquakes to occur during periods of higher tidal force.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Forecasting:</strong> Demonstrated that next-day magnitude forecasting accuracy improves when using lunar data, and even more so when combining lunar and sunspot information.</li>
+                    </ul>
+                </section>
+
+                <!-- <section>
+                    <h3>Contributions & Future Work</h3>
+                    <ul>
+                        <li><strong>Main Contribution:</strong> The first systematic investigation into the combined <em>causal</em> effect of sunspot numbers and lunar tidal forces on earthquakes.</li>
+                        <li>We hope these findings encourage the broader adoption of lunar and solar data to improve earthquake forecasts.</li>
+                        <li><strong>Future Work:</strong>
+                            <ol>
+                                <li>Design forecasting algorithms that can more effectively integrate these heterogeneous data types.</li>
+                                <li>Address the significant challenge of <strong>spatial prediction</strong> (where an earthquake might occur).</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </section> -->
+
+                <section data-section="Pinpointing the Sun-Earthquake Mechanism" style="text-align: left;">
+                    <h1>Pinpointing the Sun-Earthquake Mechanism</h1>
+                    <ul>
+                        <li>Previous work established a causal link: solar activity influences earthquakes.<span class='footfullcite'>junqueira2022solar</span></li>
+                    </ul>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 45;">
+                            <br>
+                            <ul style="margin-right: 15px;">
+                                <li>However, the <b>physical mechanism</b> behind this link is still an open question. Potential pathways include:
+                                    <ul>
+                                        <li>Interactions with the geomagnetic field</li>
+                                        <li>Emission of solar particles</li>
+                                        <li>Tidal forces<span class='footfullcite'>ide2016naturegeoscience</span><span class='footfullcite'>yabe2015tidal</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <br>
+                        </div>
+                        <div class="col" style="flex: 0 0 55%;">
+                            <img src="images/sun-earth-moon-horizontal.png">
+                        </div>
+                    </div>
+                    <ul>
+                        <li><b>Our hypothesis:</b> The <b>thermal energy (heat) transfer</b> from the Sun is a major player in driving changes in the Earth's surface temperature.</li>
+                        <ul>
+                            <li>If it is a major player, then we can say it is being neglected in the literature.</li>
+                        </ul>
+                    </ul>
+                </section>
+
+                <!-- <section>
+                    <h3>Chapter Findings: The Thermal Pathway</h3>
+                    <ul>
+                        <li>Our findings support the thermal hypothesis:
+                            <ul>
+                                <li>We observe seasonal variations in earthquake locations, linked to solar irradiation.</li>
+                                <li>A delayed cause-effect analysis suggests long-term temperature changes penetrate deep into the Earth's crust.</li>
+                                <li>Surface temperature data provides predictive information similar to that of solar activity.</li>
+                            </ul>
+                        </li>
+                        <br>
+                        <li><b>Conclusion:</b> The thermal pathway is a significant mechanism by which the Sun affects seismic events.</li>
+                        <br>
+                        <li><b>Future Work:</b> A clearer understanding of these heat transfer mechanisms could lead to improved forecasting models.</li>
+                    </ul>
+                </section> -->
+
+                <section>
+                    <h3>Potential Mechanisms by Which Heat Could Affect Earthquakes</h3>
+                    <ul>
+                        <li>
+                            <strong>Thermal Stress</strong>
+                            <ul>
+                                <li>Temperature variations can induce thermal stress in rocks, altering their mechanical properties and contributing to fracture <span class='footfullcite'>kang2019review</span>.</li>
+                                <li>While surface heat penetration is slow, it can affect deeper layers over long timescales.<span class='footfullcite'>kalogirou2004measurements</span></li>
+                                <li>However, these thermally-induced stress changes are generally considered minor compared to tectonic forces.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Hydrological Cycle</strong>
+                            <ul>
+                                <li>Atmospheric temperature variations influence the hydrological cycle (evaporation, precipitation).</li>
+                                <li>This impacts subsurface water flow and pore pressure within faults, potentially triggering earthquakes.<span class='footfullcite'>wang2021earthquakes</span></li>
+                                <li>Seasonal changes like snow/ice melting can alter pore pressure and load the Earth's crust.</li>
+                                <li><strong>Example:</strong> Fluid migration from snowfall may have triggered the M7.6 Noto, Japan earthquake in 2024.<span class='footfullcite'>wang2024untangling</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>
+                            <strong>Atmospheric Pressure</strong>
+                            <ul>
+                                <li>Changes in atmospheric pressure can induce small-scale clamping and unclamping of faults.<span class='footfullcite'>liu2009slow</span></li>
+                                <li>A recently identified phenomenon is <strong>"stormquakes"</strong>, where intense storms generate seismic waves in the crust.<span class='footfullcite'>fan2019stormquakes</span></li>
+                                <li><strong>Mechanism:</strong> Storm-induced ocean waves exert pressure on the seafloor, causing vibrations within the oceanic crust.<span class='footfullcite'>gualtieri2018persistent</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <hr style="margin: 40px 0;">
+                    <ul class="fragment">
+                        <li>Thus, several plausible mechanisms have been proposed to explain how solar and atmospheric phenomena may influence seismic events.</li>
+                        <li>However, the supporting evidence for these mechanisms remains largely inconclusive.</li>
+                        <li>This underscores a clear need for further investigation into this area.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 1: Seasonal Variation of Earthquake Location -->
+                <section>
+                    <h3>Seasonal Variation of Earthquake Location</h3>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 65%;">
+                            <ul>
+                                <li>Analyzed the correlation between earthquake latitude and magnitude in the northern hemisphere, differentiated by season.</li>
+                                <li>A statistically significant lower correlation is observed during the winter ($p = 0.002$ via t-test).</li>
+                                <li>This indicates that larger earthquakes have a slight tendency to occur at higher latitudes during all seasons <strong>except</strong> for winter.</li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 35%;">
+                            <img src="./images/latitude-vs-magnitude-boxplot-fixed.jpg" alt="Boxplot showing the correlation between earthquake latitude and magnitude across different seasons.">
+                        </div>
+                    </div>
+                    <ul class="fragment">
+                        <li>This result points to a driving force connected to both latitudinal position and the cycle of meteorological seasons.</li>
+                        <li>Solar heat fits this description well, strengthening the hypothesis that it is a significant mechanism for the Sun's influence on earthquakes.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 3: Testing for Stochasticity -->
+                <section>
+                    <h3>Are Solar Activity &amp; Earthquakes Deterministic or Stochastic?</h3>
+                    <ul>
+                        <li>We employed recurrence plots to test whether the time series are deterministic or stochastic.</li>
+                        <li>Methodology from Hirata, Y. (2021)<span class='footfullcite'>hirata2021recurrence</span> was used to count the variety of <q>recurrence triangles.</q></li>
+                        <li>Exponential growth of triangle varieties suggests a deterministic system.</li>
+                        <li>Super-exponential growth suggests a stochastic system.</li>
+                        <li class="fragment">Both solar activity and earthquake occurrences exhibit super-exponential complexity, indicating they are <strong>stochastic</strong>.</li>
+                        <li class="fragment">This suggests that a portion of the stochasticity in seismic activity is inherited from the Sun</li>
+                    </ul>
+                    <div class="container">
+                        <div class="col">
+                            <img src="./images/recurrence-triangles.png" alt="Illustration of a recurrence plot and recurrence triangles." style="height: 11em;">
+                            <br>
+                            <i>Illustration of a recurrence plot and recurrence triangles.</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/202309061350RTgrowths.jpg" alt="Graph showing super-exponential growth of recurrence triangle varieties for sunspots and earthquakes." style="height: 11em;">
+                            <br>
+                            <i>Super-exponential growth of recurrence triangle varieties for sunspots and earthquakes.</i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: Mutual Information Confirms Shared Stochasticity -->
+                <section>
+                    <h3>Mutual Information Confirms Shared Stochasticity</h3>
+                    <ul>
+                        <li>Mutual information was used to quantify the statistical dependency (linear and non-linear) between the two systems.</li>
+                        $$ I(X; Y) = \sum_{x \in X} \sum_{y \in Y} p(x, y) \log \left( \frac{p(x, y)}{p(x)p(y)} \right) $$
+                        <li>Mutual information is non-zero and significantly larger than that calculated with random noise.</li>
+                        <li>This demonstrates that information is shared between the two systems, reinforcing the physical connection.</li>
+                    </ul>
+                    <div class="container">
+                        <div class="col">
+                            <img src="./images/mutual-information-delay.png" alt="Graph of mutual information between sunspots and earthquakes with a time delay.">
+                        </div>
+                        <div class="col">
+                            <img src="./images/mutual-information-delay-randomized.png" alt="Graph of mutual information between earthquakes and a random recurrence plot.">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 1: The Concept of a Time Lag -->
+                <section>
+                    <h3>The Sun-Earthquake Time Lag</h3>
+                    <ul>
+                        <li>A key aspect of the Sun-earthquake relationship is the time lag between cause and effect, which has been largely overlooked in the literature.</li>
+                        <li>Mechanisms for solar influence require significant time to manifest.
+                            <ul>
+                                <li>Thermal energy from the Sun may take weeks or months to accumulate and impact secondary processes (e.g., ice melting, atmospheric pressure changes).</li>
+                                <li>Oceans act as substantial heat reservoirs, leading to semiannual or longer delays in thermal energy dissipation.<span class='footfullcite'>pan2023annual</span></li>
+                                <li>Persistent atmospheric patterns and long-term feedback mechanisms can further extend these timescales.<span class='footfullcite'>seneviratne2010investigating</span></li>
+                            </ul>
+                        </li>
+                        <li><strong>Research Question:</strong> What is the time lag between changes in solar activity and their subsequent effects on Earth's seismicity?</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 2: Investigating the Delay -->
+                <section>
+                    <ul>
+                        <li>Used daily sunspot numbers with various time lags to forecast maximum earthquake magnitudes.</li>
+                        <li>The plots show how forecasting accuracy changes when sunspot data is time-lagged.</li>
+                    </ul>
+                    <div class="container">
+                        <div class="col"><img src="./images/sunspots-delay-results-japan.png" alt="Prediction accuracy vs. sunspot delay for Japan."></div>
+                        <div class="col"><img src="./images/sunspots-delay-results-greece.png" alt="Prediction accuracy vs. sunspot delay for Greece."></div>
+                        <div class="col"><img src="./images/sunspots-delay-results-newzealand.png" alt="Prediction accuracy vs. sunspot delay for New Zealand."></div>
+                    </div>
+                    <ul class="fragment">
+                        <li>Lags that offer statistically significant improvements (Bonferroni corrected $p &lt; 0.05$):
+                            <ul>
+                                <li><span style="min-width: 6em; display: inline-block;">Japan:</span> 30, 120, 180, 240, 300 days</li>
+                                <li><span style="min-width: 6em; display: inline-block;">Greece:</span> 30, 90, 120, 150, 180, 300 days</li>
+                                <li><span style="min-width: 6em; display: inline-block;">New Zealand:</span> 60, 90, 120, 150, 180, 300, (...) days</li>
+                            </ul>
+                        </li>
+                        <li>A delay of <strong>120 days</strong> is the first significant lag common to all three regions, possibly related to seasonal changes.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 4: Mutual Information Confirms a Delayed Effect -->
+                <section>
+                    <div class="container">
+                        <div class="col">
+                            <ul>
+                                <li>Recall that the mutual information for a zero-day lag was substantially lower than the peak values observed at non-zero lags.</li>
+                                <li>This further supports the existence of a delayed cause-effect relationship.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <img src="./images/mutual-information-delay.png" alt="Graph of mutual information between sunspots and earthquakes with a time delay." style="width: 20em;">
+                        </div>
+                    </div>
+                    <ul class="fragment">
+                        <li><strong>Thus, in summary:</strong></li>
+                        <ul>
+                            <li>A time lag exists between changes in solar activity and their effects on terrestrial seismic activity.</li>
+                            <li>Introducing a time lag to sunspot data almost always improves forecasting performance.</li>
+                            <li>A single, universal value for this delay does not exist; it is region-specific.</li>
+                            <li>The existence of a range of effective delays is physically plausible due to the multiple mechanisms by which thermal energy can trigger earthquakes (e.g., ice melt).</li>
+                        </ul>
+                    </ul>
+                </section>
+
+                <!-- <section>
+                    <ul>
+                        <li>Surface temperature is a direct consequence of solar activity and may share a similar time lag with seismic activity.</li>
+                        <li>This section assesses the extent to which surface temperature data can aid in earthquake forecasting.</li>
+                        
+                    </ul>
+                </section> -->
+
+                <!-- Slide 2: Surface Temperatures Improve Forecasts -->
+                <section>
+                    <h3>Contribution of Surface Temperature Data</h3>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 60%;">
+                            <ul>
+                                <li>Data on daily average air temperatures from Tokyo, Stylida, and Wellington can, in most cases, improve the prediction of next-day maximum earthquake magnitudes.</li>
+                                <li>The scatterplot for Japan shows how including solar and temperature data improves forecasts.</li>
+                                <li>The baseline model (using only earthquake data) tends to overestimate the maximum magnitudes.</li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 40%;">
+                            <img src="./images/predictions-scatterplot.png" alt="Scatterplot of maximum magnitude predictions for Japan.">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Forecasting Results: Japan -->
+                <section>
+                    <h3>Forecasting Results: Japan</h3>
+                    <ul>
+                        <li>The results clearly indicate that incorporating surface temperature data helps to improve prediction accuracy.</li>
+                        <li>Combining both sunspot and temperature data achieved the highest correlation among all settings tested for this region.</li>
+                    </ul>
+                    <div class="container" style="font-size: 0.8em;">
+                        <div class="col">
+                            <img src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep10000.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for any depth">
+                            <i>any depth</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 100km">
+                            <i>depth &lt; 100km</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 50km">
+                            <i>depth &lt; 50km</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 30km">
+                            <i>depth &lt; 30km</i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: Forecasting Results: Balkans -->
+                <section>
+                    <h3>Forecasting Results: Balkans</h3>
+                    
+                    <ul>
+                        <li>The inclusion of sunspots overall provided better improvements than surface temperatures.</li>
+                        <li>The highest correlation for this region was achieved when both sunspot and temperature data were used in conjunction.</li>
+                        <li>The biggest improvements were observed when restricting the dataset to shallow earthquakes</li>
+                    </ul>
+                    <div class="container" style="font-size: 0.8em;">
+                        <div class="col">
+                            <img src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for any depth">
+                            <i>any depth</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 100km">
+                            <i>depth &lt; 100km</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 50km">
+                            <i>depth &lt; 50km</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 30km">
+                            <i>depth &lt; 30km</i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: Forecasting Results: New Zealand -->
+                <section>
+                    <h3>Forecasting Results: New Zealand</h3>
+
+                    <ul>
+                        <li>Using temperature data yields a correlation that is not statistically different from the baseline.</li>
+                        <li>Using sunspot data results in a significantly better correlation.</li>
+                        <li>The importance of temperature data becomes more pronounced as earthquake depths are restricted to be shallower.</li>
+                    </ul>
+                    <div class="container" style="font-size: 0.8em;">
+                        <div class="col">
+                            <img src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep10000.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for any depth">
+                            <i>any depth</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 100km">
+                            <i>depth &lt; 100km</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 50km">
+                            <i>depth &lt; 50km</i>
+                        </div>
+                        <div class="col">
+                            <img src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 30km">
+                            <i>depth &lt; 30km</i>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <ul class="fragment">
+                        <li>The results strengthen the idea of a causal connection between surface temperatures and earthquake magnitudes.</li>
+                        <li>The incremental improvement from using both datasets is modest, indicating informational redundancy.</li>
+                        <li>This redundancy suggests that the Sun influences earthquakes via the same thermal pathway by which it drives surface temperatures.</li>
+                        <!-- <ul>
+                            <li>Solar heat flux is a primary intermediate step in the causal chain between solar activity and earthquakes.</li>
+                        </ul> -->
+                    </ul>
+                </section>
+
+                <!-- Slide 1: Rationale for Depth Analysis -->
+                <section>
+                    <h3>Variations Depending on Earthquake Depth</h3>
+                    <ul>
+                        <li>Many natural phenomena that influence earthquakes (ice melt, sea-level changes, storms) primarily exert their effects at shallow depths.</li>
+                        <li>These phenomena are often linked to atmospheric temperature and sunspot activity.</li>
+                        <li><strong>Idea:</strong> If temperature and/or sunspots influence earthquakes, the intensity of this effect should vary with earthquake depth.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <!-- <h3>Depth Analysis Results: Japan</h3>
+                    <ul>
+                        <li>An overall increase in correlation is seen when restricting to shallower earthquakes.</li>
+                        <li>The improvement from surface temperatures is consistent across depths.</li>
+                        <li>Sunspot data has a positive effect only for very shallow earthquakes (&lt; 30km).</li>
+                        <li>The greatest improvement from combining both datasets was observed for the &lt; 30km threshold.</li>
+                    </ul> -->
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 10%; font-weight: bold; text-align: left;">
+                            <div style="margin: 3em 0 5em;">Japan</div>
+                            <div style="margin: 9em 0;">Balkans</div>
+                            <div style="margin: 5em 0;">New Zealand</div>
+                        </div>
+                        <div class="col" style="flex: 0 0 90%">
+                            <div class="container" style="font-size: 0.8em;">
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep10000.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for any depth">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 100km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 50km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 30km">
+                                </div>
+                            </div>
+                            <div class="container" style="font-size: 0.8em;">
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for any depth">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 100km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 50km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 30km">
+                                </div>
+                            </div>
+                            <div class="container" style="font-size: 0.8em;">
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep10000.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for any depth">
+                                    <i>any depth</i>
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 100km">
+                                    <i>depth &lt; 100km</i>
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 50km">
+                                    <i>depth &lt; 50km</i>
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 30km">
+                                    <i>depth &lt; 30km</i>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+
+                <!-- Slide 2: Depth Analysis Results: Japan -->
+                <section>
+                    <!-- <h3>Depth Analysis Results: Japan</h3>
+                    <ul>
+                        <li>An overall increase in correlation is seen when restricting to shallower earthquakes.</li>
+                        <li>The improvement from surface temperatures is consistent across depths.</li>
+                        <li>Sunspot data has a positive effect only for very shallow earthquakes (&lt; 30km).</li>
+                        <li>The greatest improvement from combining both datasets was observed for the &lt; 30km threshold.</li>
+                    </ul> -->
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 70%">
+                            <div class="container" style="font-size: 0.8em;">
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep10000.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for any depth">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 100km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 50km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/japan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag3.0-maxMag99.png" alt="Japan forecast accuracy for depth < 30km">
+                                </div>
+                            </div>
+                            <div class="container" style="font-size: 0.8em;">
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for any depth">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 100km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 50km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/balkan-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag2.3-maxMag99.png" alt="Balkans forecast accuracy for depth < 30km">
+                                </div>
+                            </div>
+                            <div class="container" style="font-size: 0.8em;">
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep10000.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for any depth">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep100.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 100km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep50.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 50km">
+                                </div>
+                                <div class="col">
+                                    <img style="margin: 0;" src="./images/newzealand-sunspots-and-temperatures-W7-predW1-minDep-1-maxDep30.0-minMag2.5-maxMag99.png" alt="New Zealand forecast accuracy for depth < 30km">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="flex: 0 0 30%; text-align: left; margin-left: 0.5em;">
+                            <div style="margin-bottom: 1em;"><span class="fas fa-arrow-right"></span> A sharp increase in correlation is observed as the depth threshold is decreased.</div>
+                            <div style="margin-bottom: 1em;"><span class="fas fa-arrow-right"></span> In absolute value, the greatest improvement in <i>Temp &amp; Sunspots</i> comes when using depth &lt; 30km.</div>
+                            <div style="margin-bottom: 1em;"><span class="fas fa-arrow-right"></span> In almost all cases, <i>Temp &amp; Sunspots</i> yields the best prediction accuracy.</div>
+                            <div style="margin-bottom: 1em;"><span class="fas fa-arrow-right"></span> When <i>depth &lt; 30km</i>, <i>Temp &amp; Sunspots</i> always yields the best accuracy.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 1: Analyzing the Evidence -->
+                <section>
+                    <h3>Analyzing the Evidence</h3>
+                    <ul>
+                        <li>The idea that atmospheric temperature affects earthquakes is accepted, but is the influence significant or negligible? Our results provide insights.</li>
+                    </ul>
+                    <ul>
+                        <li><strong>Seasonal Variation:</strong>
+                            <ul class="fragment fade-in-then-semi-out">
+                                <li>The existence of seasonal variation in earthquake locations points to the importance of seasonal drivers like atmospheric temperatures, ice melt, and storms.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="container">
+                        <div class="col">
+                            <ul>
+                                <li><strong>Delayed Cause-and-Effect:</strong>
+                                    <ul class="fragment fade-in-then-semi-out">
+                                        <li>The time lag between solar activity and seismic response is on the order of 1 to several months.</li>
+                                        <li>This aligns with long-term effects of surface temperature penetrating the Earth's crust.</li>
+                                        <li>Surface temperature data improves predictability, strengthening this hypothesis.</li>
+                                        <li>Informational redundancy between solar and temperature data suggests a common thermal pathway.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul>
+                                <li><strong>Shallow Earthquakes:</strong>
+                                    <ul class="fragment fade-in-then-semi-out">
+                                        <li>Predictability improves when analysis is restricted to shallow earthquakes.</li>
+                                        <li>This is consistent with surface-level phenomena (driven by temperature) primarily affecting the upper crust.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="fragment fade-up">
+                                <li><strong>To sum up:</strong>
+                                    <ul>
+                                        <li>We found solid evidence, from various different kinds of analysis, showing the significance of thermal energy.</li>
+                                        <li>It is on par, if not greater, than other possibilities.</li>
+                                        <li>Future work should work on narrowing it down further (hydrological effects, atmospheric pressure, etc).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- <section>
+                    <h3>Future Work</h3>
+                    <ul>
+                        <li>This work argues for the significant role of thermal energy, but this energy can influence seismicity through many distinct pathways.</li>
+                        <li>Future research must determine which of these pathways are most relevant.</li>
+                        <li>This includes:
+                            <ul>
+                                <li>Understanding how the hydrological cycle alters the mechanical characteristics of faults.</li>
+                                <li>Identifying which faults are most susceptible to these influences.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section> -->
+
+                <!-- <section>
+                    <h3>Summary: Four Key Lines of Evidence</h3>
+                    <p>Our findings provide substantial support for the hypothesis that solar activity influences earthquakes via a thermal pathway, resting on four key lines of evidence:</p>
+                    <ol>
+                        <li>Earthquake occurrences exhibit a dependence on both seasons and latitudes.</li>
+                        <li>Solar activity and earthquakes are both stochastic processes that share dynamical information.</li>
+                        <li>A time lag exists between solar activity and its effects on earthquakes.</li>
+                        <li>Surface air temperature data can replace or complement sunspot numbers to improve the predictability of the next day's maximum magnitude.</li>
+                    </ol>
+                </section> -->
+
+                <!-- <section>
+                    <h3>Main Contribution</h3>
+                    <p>By highlighting the significance of solar thermal energy, this work aims to encourage the inclusion of <strong>surface temperature data</strong> in earthquake forecasting models, thereby enhancing the accuracy and reliability of earthquake forecasts.</p>
+                </section> -->
+
+                <!-- Slide 1: NNs in Earthquake Forecasting -->
+                <section data-section="Neural Networks in Earthquake Forecasting">
+                    <h3>Neural Networks in Earthquake Forecasting</h3>
+                    <ul>
+                        <li>The last decade has seen a rapid rise in the use of machine learning for geophysical problems.</li>
+                        <li>Neural Networks (NNs) are flexible tools for discovering complex patterns useful for prediction.</li>
+                        <li>A growing body of work explores NNs for seismic forecasting.<span class='footfullcite'>asencio2016sensitivity</span><span class='footfullcite'>reyes2013neural</span><span class='footfullcite'>panakkat2007neural</span></li>
+                        <li>However, a common trend is to progressively increase model size and depth, hoping greater capacity yields better performance.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 2: A Problematic Tendency -->
+                <section>
+                    <h3>A Problematic Tendency</h3>
+                    <ul>
+                        <li>From a Statistical Learning Theory (SLT) perspective, this is an issue.<span class='footfullcite'>luxburg2011statistical</span></li>
+                        <li>Expanding a network's architecture increases its capacity (e.g., VC dimension), heightening the risk of overfitting.<span class='footfullcite'>vapnik1998statistical</span></li>
+                        <li>The common response is regularization (dropout, early stopping, etc.).</li>
+                        <li>However, this is not a complete solution for seismic forecasting:
+                            <ul>
+                                <li>With limited and noisy data, even well-regularized large models can produce unstable results.</li>
+                                <li>Heavy regularization on oversized models can be difficult to interpret, limiting scientific insight.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Slide 3: Our Approach: Capacity-Aware Design -->
+                <section>
+                    <h3>Our Approach: Capacity-Aware Model Design</h3>
+                    <ul>
+                        <li>We advocate for a complementary approach: careful, capacity-aware model design combined with principled feature selection.</li>
+                        <li>Instead of starting with a large model and <q>taming</q> it, we design models whose capacity is constrained to reflect our domain knowledge.</li>
+                        <li><strong>Benefits:</strong>
+                            <ul>
+                                <li><strong>Parsimony:</strong> Reduces effective capacity and the sample size required for reliable generalization.</li>
+                                <li><strong>Interpretability:</strong> Enforcing structure makes it easier to trace which inputs contribute to a forecast.</li>
+                                <li><strong>Robustness:</strong> Aligning architecture with geophysics is more likely to learn physically plausible representations.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Slide 1: The Core Problem in Statistical Learning Theory -->
+                <section>
+                    <h3>The Core Problem in Statistical Learning Theory</h3>
+                    <ul>
+                        <li>The goal of a learner is to find a function \(f\) that minimizes the <strong>true risk</strong> (generalization error):
+                            \[ R(f) = \mathbb{E}_{(x,y)\sim\mathcal{D}}\big[\,\ell(f(x),y)\,\big] \]
+                        </li>
+                        <li>However, we can only minimize the <strong>empirical risk</strong> on our training sample \(S\):
+                            \[ \hat{R}_n(f) = \frac{1}{n}\sum_{i=1}^n \ell(f(x_i),y_i) \]
+                        </li>
+                        <li><strong>Central Question of SLT:</strong> Under what conditions does a small empirical risk imply a small true risk?</li>
+                    </ul>
+                    <ul class="fragment">
+                        <li>The answer depends on the <strong>space of admissible functions</strong> \(\mathcal{F}\) (the set of all possible models the learner can choose from).</li>
+                        <li>The generalization gap is bounded by the complexity, or <strong>capacity</strong> of \(\mathcal{F}\):
+                            \[ \big|R(f) - \hat R_n(f)\big| \le \mathcal{N}(\text{capacity of } \mathcal{F}, n) \]
+                        </li>
+                        <li>A larger, more complex \(\mathcal{F}\) increases the risk of overfitting.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 2: The Importance of Capacity Control -->
+                <section>
+                    <h3>The Importance of Capacity Control</h3>
+                    <ul>
+                        <li>This leads to the classic <strong>bias-variance trade-off</strong>:
+                            <ul>
+                                <li>If \(\mathcal{F}\) is too small (low capacity): high bias (model can't capture the underlying pattern).</li>
+                                <li>If \(\mathcal{F}\) is too large (high capacity): high variance (model fits noise in the training data).</li>
+                            </ul>
+                        </li>
+                        <li>The key is to precisely control \(\mathcal{F}\) so it's small enough to prevent overfitting, but large enough to contain the function we're looking for.</li>
+                        <li class="fragment"><strong>Two Strategies for Capacity Control:</strong>
+                            <ol>
+                                <li><strong>Directly restrict the space \(\mathcal{F}\):</strong> Our primary approach. Design a smaller, dedicated architecture (e.g., fewer parameters, constrained connectivity). This is a more principled way to incorporate domain knowledge.</li>
+                                <li><strong>Regularization:</strong> Penalize complexity while searching in a larger space (e.g., \(\ell_1, \ell_2\), dropout, early stopping). A complementary, but less direct, technique.</li>
+                            </ol>
+                        </li>
+                        <li class="fragment"><strong>Our Argument:</strong> Many ML approaches for earthquake forecasting use unnecessarily large \(\mathcal{F}\) and rely only on regularization. We propose a carefully designed, lower-capacity architecture tailored to the problem.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 7: Animation of Function Space -->
+                <section>
+                    <h3>Space of Admissible Functions: $\mathcal{F}$</h3>
+                    <div class="animation-container">
+                        <div class="svg-wrapper">
+                            <svg id="function-space-svg" viewBox="0 0 500 450">
+                                <path id="animated-shape" d="M 164.99968,425.31315 C 242.8202,448.46331 308.67199,435.42532 375.46049,409.53867 441.74028,364.19893 478.71265,308.22499 490.94128,221.40402 520.61287,-52.755201 15.17622,-81.056024 6.2452599,223.83086 12.99831,333.51078 88.00851,403.79435 164.99968,425.31315 Z" fill="rgba(72, 122, 255, 0.3)" stroke="rgb(72, 122, 255)" stroke-width="3"></path>
+                                <text x="48%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100" font-family="Times New Roman, serif" font-style="italic" fill="#333">&#x1D4D5;</text>
+                            </svg>
+                        </div>
+                        <div class="anim-controls">
+                            <button class="anim-control-btn" id="regularization-btn">1. Regularization</button>
+                            <button class="anim-control-btn" id="capacity-btn">2. Our Approach</button>
+                            <button class="anim-control-btn" id="reset-btn">Reset</button>
+                        </div>
+                    </div>
+                    <script>
+                    (() => {
+                        const shape = document.getElementById('animated-shape');
+                        const resetBtn = document.getElementById('reset-btn');
+                        const regBtn = document.getElementById('regularization-btn');
+                        const capBtn = document.getElementById('capacity-btn');
+
+                        if (!shape || !resetBtn || !regBtn || !capBtn) {
+                            console.error("Animation elements not found!");
+                            return;
+                        }
+
+                        const initialPath = 'M 164.99968,425.31315 C 242.8202,448.46331 308.67199,435.42532 375.46049,409.53867 441.74028,364.19893 478.71265,308.22499 490.94128,221.40402 520.61287,-52.755201 15.17622,-81.056024 6.2452599,223.83086 12.99831,333.51078 88.00851,403.79435 164.99968,425.31315 Z';
+                        // A keyhole path with the same command structure as the circle path for a smooth morph
+                        const keyholePath = 'm 153.26816,341.95238 c 64.42744,-4.29328 128.85487,-5.33436 193.28231,0 C 333.84445,282.83855 368.70703,145.24117 338.5724,170.67174 468.83985,34.156208 18.614829,36.580644 153.60837,175.92046 c -35.05005,-19.46111 16.01219,107.22208 -0.34021,166.03192 z';
+
+                        let currentState = 'initial';
+
+                        const resetState = () => {
+                            shape.style.transform = 'scale(1)';
+                            shape.setAttribute('d', initialPath);
+                            currentState = 'initial';
+                        };
+
+                        const showRegularization = () => {
+                            if (currentState !== 'initial') {
+                                resetState();
+                            }
+                            // Use timeout to allow CSS to catch the change after a reset
+                            setTimeout(() => {
+                                shape.style.transform = 'scale(0.6)';
+                                currentState = 'regularization';
+                            }, 50);
+                        };
+
+                        const showCapacityReduction = () => {
+                            if (currentState !== 'initial') {
+                                resetState();
+                            }
+                            setTimeout(() => {
+                                shape.style.transform = 'scale(0.7)';
+                                shape.setAttribute('d', keyholePath);
+                                currentState = 'capacity';
+                            }, 50);
+                        };
+
+                        resetBtn.addEventListener('click', resetState);
+                        regBtn.addEventListener('click', showRegularization);
+                        capBtn.addEventListener('click', showCapacityReduction);
+
+                        // Set initial state on load
+                        resetState();
+                    })();
+                    </script>
+                </section>
+
+                <!-- Slide 1: Motivation & Core Innovations -->
+                <section data-auto-animate>
+                    <h3>A Capacity-Aware NN Architecture</h3>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 70%;">
+                            <ul>
+                                <li>Motivated by SLT, we designed a custom neural network with deliberately reduced capacity.</li>
+                                <li><strong>How?</strong> By constraining the first layer to be not fully connected, we reduce the space of admissible functions \(\mathcal{F}\) without sacrificing expressiveness.</li>
+                                <li><strong>Core Innovations:</strong>
+                                    <ol>
+                                        <li>Calculating seismicity indicator features over various time-window lengths (short-term and long-term).</li>
+                                        <!-- <li>Processing seismicity indicators of different time-window lengths separately</li> -->
+                                        <li>Inclusion of edit distances <i>and</i> seismicity indicators in the same prediction framework</li>
+                                        <li>A <strong>hierarchical neural network</strong> where the first layer has dedicated subnetworks for each time-window length.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col" style="flex: 0 0 30%;">
+                            <img src="./images/hierarchical-nn.png" style="width: 100%;">
+                        </div>
+                    </div>
+                    
+                </section>
+
+                <!-- Slide 2: Hierarchical Architecture & Features -->
+                <section data-auto-animate>
+                    <h3>Hierarchical Architecture & Features</h3>
+                    <div class="container">
+                        <div class="col">
+                            <img src="./images/hierarchical-nn.png" style="width: 100%;">
+                        </div>
+                        <div class="col">
+                            <strong>Seismicity Indicators (per window):</strong>
+                            <ul>
+                                <li>T-value</li>
+                                <li>Mean magnitude</li>
+                                <li>Rate of sqrt-seismic energy</li>
+                                <li>Time since first large event</li>
+                                <li>Gutenberg-Richter slope & intercept</li>
+                                <li>GR fit error</li>
+                                <li>Magnitude deficit</li>
+                                <li>Coefficient of variation of inter-event times</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: How it Works -->
+                <section>
+                    <h3>How It Works: A Two-Stage Approach</h3>
+                    <ul>
+                        <li>Indicators are computed for windows of 7, 15, 30, 60, 90, and 180 days to capture different temporal scales.</li>
+                        <li><strong>Stage 1: Subnetwork Stage</strong>
+                            <ul>
+                                <li>Each time-window's set of indicators is fed exclusively into its own dedicated subnetwork.</li>
+                                <li>This allows for specialized feature extraction unique to each temporal scale, limiting cross-scale interference.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Stage 2: Integration Stage</strong>
+                            <ul>
+                                <li>The outputs of all subnetworks are concatenated and passed to a fully connected layer.</li>
+                                <li>This integrates the multi-scale representations into a unified latent space for the final prediction.</li>
+                            </ul>
+                        </li>
+                        <li>This design is consistent with SLT: it restricts \(\mathcal{F}\) to respect the data's hierarchical structure.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 4: Results & Conclusion -->
+                <section>
+                    <h3>Results & Conclusion</h3>
+                    <div class="container">
+                        <div class="col">
+                            <ul>
+                                <li>Applied to catalogs from New Zealand, Japan, and the Balkans.</li>
+                                <li>Average improvement in forecasting accuracy:
+                                    <ul>
+                                        <li><strong>17.1%</strong> vs. naive fully-connected NN.</li>
+                                        <li><strong>24.5%</strong> vs. radial basis functions.</li>
+                                    </ul>
+                                </li>
+                                <li>Achieved comparable results to literature with a more reliable model (fewer layers, >10x fewer parameters).</li>
+                                <li>The model is in its early stages and shows great promise for future improvement.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <p>Japan Prediction Results (Correlation: 0.35)</p>
+                            <p style="background-color: red;">(figure here)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>The proposed neural network was then used to analyze <strong>interregional seismic interactions</strong>.</li>
+                        <li>The literature provides strong evidence that distant seismic regions are interconnected through both statistical correlations and physical triggering mechanisms.</li>
+                        <li><strong>Large-Scale Stress Transmission & Correlation:</strong>
+                            <ul>
+                                <li>Tectonic forces transmit stress over vast distances, causing synchronous seismic variations.</li>
+                                <li>Network analysis has revealed strong correlations between regions in Japan over 1000 km apart.<span class='footfullcite'>tenenbaum2012earthquake</span></li>
+                                <li>Correlations also exist between seismicity at different depths in distinct areas.<span class='footfullcite'>takayama1992correlation</span></li>
+                            </ul>
+                        </li>
+                        <li><strong>Long-Range & Long-Term Triggering:</strong>
+                            <ul>
+                                <li>Triggered seismic activity can persist for days after surface waves pass, behaving like aftershocks.</li>
+                                <li>Major earthquakes can follow large events in neighboring regions within a 3-5 year timeframe.<span class='footfullcite'>mantovani2010long</span></li>
+                            </ul>
+                        </li>
+                        <li>This body of work provides a strong rationale for investigating whether data from one region can improve earthquake forecasting in another.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 1: Methodology -->
+                <section>
+                    <h3>Methodology</h3>
+                    <ul>
+                        <li>To analyze causal links, Japan and New Zealand were divided into subregions based on centroids over tectonic plate boundaries.</li>
+                        <li><strong>Three Experimental Settings:</strong>
+                            <ol>
+                                <li><strong>Cross-region nowcasting:</strong> Data from region A predicts current 30-day max magnitude in region B.</li>
+                                <li><strong>Cross-region forecasting:</strong> Data from A predicts <em>next</em> 30-day max magnitude in B.</li>
+                                <li><strong>Joint-region forecasting:</strong> Data from A + B predicts next 30-day max magnitude in B.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                    <div class="container">
+                        <div class="col" style="flex: 0 0 48%;">
+                            <img src="./images/japan-centroids-numeration.png" style="width: 80%;">
+                        </div>
+                        <div class="col" style="flex: 0 0 48%;">
+                            <img src="./images/newzealand-centroids-numeration.png" style="width: 80%;">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Cross-Region Nowcasting Results -->
+                <section>
+                    <h3>Cross-Region Nowcasting Results</h3>
+                    <ul>
+                        <li>Mixed positive and negative correlations, but the average was statistically positive in both directions (JP &rarr; NZ and NZ &rarr; JP).</li>
+                        <li>For example, predictions for NZ subregion 1 (Lake Pearson) showed a clear positive correlation.</li>
+                        <li><strong>Interpretation:</strong> The connection suggests the earthquake generating processes in both regions might share a common driving force.</li>
+                    </ul>
+                    <div class="container">
+                        <div class="col">
+                            <img src="./images/grid-prediction-same-day-single-region-Japan-NZ.png">
+                        </div>
+                        <div class="col">
+                            <img src="./images/grid-prediction-same-day-single-region-NZ-Japan.png">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Forecasting & Joint-Region Results -->
+                <section>
+                    <h3>Forecasting & Joint-Region Results</h3>
+                    <ul>
+                        <li><strong>Cross-Region Forecasting:</strong>
+                            <ul>
+                                <li>Observed a positive average correlation when using JP data to predict NZ, and vice-versa.</li>
+                                <li>Example: NZ subregions 7 (Whanganui) & 8 (Wellington) helped forecast for JP subregion 8 (Nagaoka).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Joint-Region Forecasting:</strong>
+                            <ul>
+                                <li>On average, adding data from the distant region did <strong>not</strong> improve local forecasting accuracy.</li>
+                                <li>However, some NZ subregions (2, 7, 8) did benefit significantly from JP earthquake data.</li>
+                                <li>Thus, the information brought by including data from another region could be in some sense redundant.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Slide 4: Conclusions -->
+                <section>
+                    <h3>Conclusions on Inter-Regional Causality</h3>
+                    <ul>
+                        <li>Our findings suggest a causal connection exists between seismic activity in Japan and New Zealand.</li>
+                        <li>However, we did not find strong evidence that distant earthquake data adds predictive value when combined with local data.</li>
+                        <li><strong>Main Hypothesis:</strong> The observed causality may stem from <strong>shared underlying drivers</strong> rather than direct triggering mechanisms that could enhance forecasting.</li>
+                        <li>The lack of improvement could also be due to limitations of the current model, warranting further investigation.</li>
+                    </ul>
+                </section>
+
+                <!-- Slide 1: Thesis Contributions -->
+                <section>
+                    <h3>Thesis Contributions: A Multi-faceted Analysis of Edit Distances</h3>
+                    <ul>
+                        <li>This thesis analyzes the use of edit distances in earthquake forecasting from several novel perspectives:</li>
+                        <li style="margin-top: 1em;"><strong>Efficient Computation:</strong>
+                            <ul>
+                                <li>Streamlined edit distance calculation, leveraging parallel computing to make the analysis of large seismic datasets feasible.</li>
+                            </ul>
+                        </li>
+                        <li style="margin-top: 1em;"><strong>Theoretical Grounding (during my master's):</strong>
+                            <ul>
+                                <li>Formulated the forecasting problem on a solid theoretical basis, using Huke's embedding theorem to justify time-windows and edit distance as a natural metric between them.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Slide 2: Thesis Contributions (cont.) -->
+                <section>
+                    <h3>Thesis Contributions: A Multi-faceted Analysis of Edit Distances</h3>
+                    <ul>
+                        <li style="margin-top: 1em;"><strong>Dynamical Systems Perspective:</strong>
+                            <ul>
+                                <li>Conducted a deep analysis of the coupling between earthquakes and other dynamical systems (the Sun and Moon).</li>
+                                <li>Results indicate a link between lunar tides to seismicity, with a strong correlation between differential pulls earthquake magnitudes.</li>
+                                <li>Provided strong evidence for a thermal pathway linking solar activity to seismicity, improving forecast accuracy.</li>
+                            </ul>
+                        </li>
+                        <li style="margin-top: 1em;"><strong>Bridging Methodologies:</strong>
+                            <ul>
+                                <li>Pioneered the integration of our edit distance framework with what is most often used in the literature: <i>statistical indicators</i>.</li>
+                                <li>This is done by proposing a novel hierarchical neural network architecture.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Slide 3: Overall Conclusion & Future Outlook -->
+                <section>
+                    <h3>Overall Conclusion & Future Outlook</h3>
+                    <ul>
+                        <li>This work establishes edit distance as a powerful, theoretically-grounded, and computationally feasible tool for earthquake forecasting.</li>
+                        <!-- <li style="margin-top: 1em;"><strong>Key Finding:</strong> We provided substantial evidence that the Sun influences earthquakes via a thermal pathway, highlighting the value of including <strong>surface temperature data</strong> in forecasting models.</li> -->
+                        <li style="margin-top: 1em;"><strong>Future Directions:</strong>
+                            <ul>
+                                <li>Further investigation into the specific physical mechanisms of the Sun-Earth thermal link.</li>
+                                <li>Development and refinement of the hierarchical neural network to effectively combine diverse precursor data.</li>
+                                <li>Application of this framework to other complex dynamical systems.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p style="font-family: 'Great Vibes', 'Snell Roundhand', 'Zapfino', 'Edwardian Script ITC', 'Palace Script MT', Times, serif; font-size: 5em;">Thank You!</p>
+                </section>
+            </div>
+		</div>
+
+		<script src="./dist/reveal.js"></script>
+        <script src="./plugin/markdown/markdown.js"></script>
+        <script src="./plugin/highlight/highlight.js"></script>
+        <script src="./plugin/notes/notes.js"></script>
+        <script src="./plugin/math/math.js"></script>
+        <script src="./plugin/zoom/zoom.js"></script>
+        <script src="./plugin/pointer/pointer.js"></script>
+        <!-- <script src="./plugin/appearance/appearance.js"></script> -->
+        <script src="./css/plotly-3.1.0.min.js"></script>
+        <script src="./triangles.js"></script>
+        <script src="./tocmaker.js"></script>
+        <script src="./citations.js"></script>
+        <script src="./lorenz-anim.js"></script>
+        <script src="./henon-anim.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+                width: 960*1.2,
+	            height: 700*1.2,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+                slideNumber: "c",
+                pdfSeparateFragments: false,
+                
+				plugins: [ RevealZoom, RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealPointer], //, Appearance ],
+
+                pointer: {
+                    key: "q", // key to enable pointer, default "q", not case-sensitive
+                    color: "red", // color of a cursor, default "red" any valid CSS color
+                    opacity: 0.8, // opacity of cursor, default 0.8
+                    pointerSize: 16, // pointer size in px, default 12
+                    alwaysVisible: false, // should pointer mode be always visible? default "false"
+                    tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+                },
+
+                katex: {
+                    local: '',
+                    macros: {
+                       "\\vec": "\\mathbf{#1}"
+                    }
+                },
+                // appearance: {
+	            // 	autoappear: true,
+		        //     autoelements: {
+                //         'ul li': {
+                //             "animation": "animate__fadeInLeft",
+                //             "speed": "faster",
+                //             "delay": 0
+                //         },
+                //         'ol li': {
+                //             "animation": "animate__fadeInRight",
+                //             "speed": "faster",
+                //             "delay": 0
+                //         }
+                //     }
+                // },
+			});
+
+            Reveal.addEventListener('ready', function(event) {
+                const entered = event.currentSlide;   // the slide you entered
+                const indices = Reveal.getIndices();
+                const horizontalIndex = indices.h; // Horizontal slide index
+                const verticalIndex = indices.v;   // Vertical slide index
+                const fragmentIndex = indices.f;   // Fragment index within the slide
+                const flattenedIndex = Reveal.getSlidePastCount();
+
+                // Enter logic
+                if (entered && horizontalIndex === 0) {
+                    addTitleTriangles();
+                }
+                
+                if (entered && entered.classList.contains("noslidenumber")) {
+                    document.querySelector(".slide-number").classList.remove("fade-in");
+                    document.querySelector(".slide-number").classList.add("fade-out");
+                }
+
+                makeCitations();
+            });
+
+            Reveal.addEventListener('slidechanged', function(event) {
+                const entered = event.currentSlide;   // the slide you entered
+                const left = event.previousSlide;     // the slide you came from (may be null)
+                const indices = Reveal.getIndices();
+                const horizontalIndex = indices.h; // Horizontal slide index
+                const verticalIndex = indices.v;   // Vertical slide index
+                const fragmentIndex = indices.f;   // Fragment index within the slide
+                const flattenedIndex = Reveal.getSlidePastCount();
+
+                // Enter logic
+                if (entered && horizontalIndex === 0) {
+                    addTitleTriangles();
+                }
+
+                // Leave logic
+                if (entered && horizontalIndex !== 0) {
+                    removeTitleTriangles();
+                }
+
+                console.log(entered);
+                if (entered && entered.classList.contains("toc-section")){
+                    addTocTriangles();
+                } else {
+                    removeTocTriangles();
+                }
+
+                if (entered && entered.classList.contains("noslidenumber")) {
+                    document.querySelector(".slide-number").classList.remove("fade-in");
+                    document.querySelector(".slide-number").classList.add("fade-out");
+                } else {
+                    document.querySelector(".slide-number").classList.remove("fade-out");
+                    document.querySelector(".slide-number").classList.add("fade-in");
+                }
+            });
+		</script>
+
+	</body>
+</html>

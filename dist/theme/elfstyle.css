@@ -1,0 +1,578 @@
+/**
+ * White theme for reveal.js. This is the opposite of the 'black' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+@import url(./fonts/source-sans-pro/source-sans-pro.css);
+section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+  color: #fff;
+}
+
+.toc-subelem > li {
+  margin: 0.2em 0 !important;
+}
+
+.reveal .slides section .footnotes {
+  text-align: left;
+  margin: 20px 0 0 0;
+}
+
+.reveal .slides section .footnotes p {
+  font-size: 0.6em;
+  margin: 5px 0 5px 0;
+}
+
+.reveal .slide-number {
+  font-size: 24pt; /* Increase font size */
+  color: #126262; /* Change text color to white */
+  background-color: initial;
+  font-family: sans-serif; /* Change font family */
+  font-style: italic; /* Make it bold */
+  bottom: 20px; /* Adjust vertical position */
+  left: 20px; /* Adjust horizontal position */
+  right: auto;
+  /* Add any other CSS properties you want to modify */
+}
+
+.reveal .slide-number a:hover {
+  color: #126262;
+}
+
+.reveal .controls {
+  color: #126262;
+}
+
+.reveal .toc-faded {
+  opacity: 20%;
+}
+
+/*.toc-root a {
+  color: #0000ff !important;
+}*/
+
+/* This will match the <li> that parents an a.toc-faded */
+.reveal li:has(> a.toc-faded)::before {
+  opacity: 20%;
+}
+
+.reveal .slides section ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 1.6em; /* indentation for the list block */
+}
+
+.reveal .slides section ul ul {
+  padding-left: 1.2em;
+}
+
+.reveal .slides section ul ul ul {
+  padding-left: 1.2em;
+}
+
+.reveal .slides section ul > li {
+  position: relative;
+  padding-left: 1.2em; /* space for the icon */
+  margin-bottom: 0.45em;
+  line-height: 1.35;
+}
+
+/* top-level icon (level 1) */
+.reveal .slides section ul > li::before,
+.reveal .slides section ul:not(ul) > li::before {
+  content: "\f04b"; /* fa-circle (FontAwesome) */
+  font-family: "Font Awesome 7 Free"; /* or Font Awesome 5 depending on your CDN */
+  font-weight: 900; /* solid for FA6; use 400 for regular */
+  position: absolute;
+  left: 0;
+  top: 0.1em; /* tweak vertical alignment */
+  font-size: 0.8em; /* icon size relative to text */
+  color: var(--slide-foreground, #212121);
+}
+
+/* second-level icon (ul inside ul) */
+.reveal .slides section ul ul > li::before {
+  content: "\f064"; /* fa-angle-right */
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0.05em;
+  top: 0.18em;
+  font-size: 0.7em;
+  transform: scaleY(-1);
+  color: var(--slide-foreground, #00b0b0);
+}
+
+/* third-level icon */
+.reveal .slides section ul ul ul > li::before,
+.reveal .slides section ul ul ul ul > li::before {
+  content: "\f105"; /* fa-star */
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0.8em;
+  top: 0.35em;
+  font-size: 0.65em;
+  color: var(--slide-foreground, #212121);
+}
+
+.reveal ol {
+  list-style-type: none !important; /* remove default numbers */
+  counter-reset: my-counter; /* start at 0 */
+  padding-left: 1.2em; /* space for the bullets */
+}
+
+.reveal ol > li {
+  counter-increment: my-counter; /* increment for each item */
+  position: relative; /* to place the pseudo-element */
+  margin: 0.6em 0;
+}
+
+.reveal ol > li::before {
+  content: counter(my-counter);
+  position: absolute;
+  left: -1.7em; /* position to the left of text */
+  top: 0.65em;
+  transform: translateY(-50%); /* center vertically */
+  width: 1.3em;
+  height: 1.3em;
+  line-height: 1.3em;
+  border-radius: 50%;
+  background-color: #212121; /* circle color */
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.reveal ol ol > li::before {
+  width: 1.1em;
+  height: 1.1em;
+  line-height: 1.1em;
+  background-color: #00b0b0;
+}
+
+.reveal ol ol ol > li::before {
+  content: counter(my-counter) ". ";
+  width: 1em;
+  height: 1em;
+  line-height: 1.15em;
+  left: -1.4em;
+  background-color: transparent;
+  color: black;
+}
+
+.container {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+}
+
+.triangle-left {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  height: 60%;
+  z-index: -1;
+  background-color: #212121;
+  opacity: 0%;
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+}
+
+.triangle-right {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 60%;
+  z-index: -2;
+  background-color: #e6e6e1;
+  opacity: 0%;
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+}
+
+.triangle-right2 {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 70%;
+  z-index: -2;
+  background-color: #126262;
+  opacity: 0%;
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+}
+
+.triangle-up-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 40%;
+  z-index: -2;
+  background-color: #212121;
+  opacity: 0%;
+  clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out; /* Adjust duration and timing function as needed */
+}
+
+.fade-in {
+  opacity: 88%;
+  transition: opacity 0.5s ease-in; /* Adjust duration and timing function as needed */
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+:root {
+  --r-background-color: #fff;
+  --r-main-font: Source Sans Pro, Helvetica, sans-serif;
+  --r-main-font-size: 26px;
+  --r-main-color: #222;
+  --r-block-margin: 20px;
+  --r-heading-margin: 0 0 20px 0;
+  --r-heading-font: Source Sans Pro, Helvetica, sans-serif;
+  --r-heading-color: #222;
+  --r-heading-line-height: 1.2;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 2.2em;
+  --r-heading2-size: 1.8em;
+  --r-heading3-size: 1.4em;
+  --r-heading4-size: 1em;
+  --r-code-font: monospace;
+  --r-link-color: #2a76dd;
+  --r-link-color-dark: rgb(30.7720647773, 99.5566801619, 192.7779352227);
+  --r-link-color-hover: rgb(73.95, 138.55, 226.1);
+  --r-selection-background-color: rgb(95.25, 152.25, 229.5);
+  --r-selection-color: #fff;
+  --r-overlay-element-bg-color: 0, 0, 0;
+  --r-overlay-element-fg-color: 240, 240, 240;
+}
+
+.reveal-viewport {
+  background: #fff;
+  background-color: var(--r-background-color);
+}
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  font-weight: normal;
+  color: var(--r-main-color);
+}
+
+.reveal ::selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal ::-moz-selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal .slides section,
+.reveal .slides section > section {
+  line-height: 1.3;
+  font-weight: inherit;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: var(--r-heading-margin);
+  color: var(--r-heading-color);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: var(--r-heading-letter-spacing);
+  text-transform: var(--r-heading-text-transform);
+  text-shadow: var(--r-heading-text-shadow);
+  word-wrap: break-word;
+}
+
+.reveal h1 {
+  font-size: var(--r-heading1-size);
+}
+
+.reveal h2 {
+  font-size: var(--r-heading2-size);
+}
+
+.reveal h3 {
+  font-size: var(--r-heading3-size);
+}
+
+.reveal h4 {
+  font-size: var(--r-heading4-size);
+}
+
+.reveal h1 {
+  text-shadow: var(--r-heading1-text-shadow);
+}
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+  margin: var(--r-block-margin) 0;
+  line-height: 1.3;
+}
+
+/* Remove trailing margins after titles */
+.reveal h1:last-child,
+.reveal h2:last-child,
+.reveal h3:last-child,
+.reveal h4:last-child,
+.reveal h5:last-child,
+.reveal h6:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: bold;
+}
+
+.reveal em {
+  font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em;
+}
+
+.reveal ol {
+  list-style-type: decimal;
+}
+
+.reveal ul {
+  list-style-type: disc;
+}
+
+.reveal ul ul {
+  list-style-type: square;
+}
+
+.reveal ul ul ul {
+  list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+  display: block;
+  margin-left: 40px;
+}
+
+.reveal dt {
+  font-weight: bold;
+}
+
+.reveal dd {
+  margin-left: 40px;
+}
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: var(--r-block-margin) auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: inline-block;
+}
+
+.reveal q {
+  font-style: italic;
+}
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: var(--r-block-margin) auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: var(--r-code-font);
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal code {
+  font-family: var(--r-code-font);
+  text-transform: none;
+  tab-size: 2;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+}
+
+.reveal .code-wrapper {
+  white-space: normal;
+}
+
+.reveal .code-wrapper code {
+  white-space: pre;
+}
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table th {
+  font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid;
+}
+
+.reveal table th[align=center],
+.reveal table td[align=center] {
+  text-align: center;
+}
+
+.reveal table th[align=right],
+.reveal table td[align=right] {
+  text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.reveal sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+.reveal small * {
+  vertical-align: top;
+}
+
+.reveal img {
+  margin: var(--r-block-margin) 0;
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+  color: var(--r-link-color);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.reveal a:hover {
+  color: var(--r-link-color-hover);
+  text-shadow: none;
+  border: none;
+}
+
+.reveal .roll span:after {
+  color: #fff;
+  background: var(--r-link-color-dark);
+}
+
+/*********************************************
+ * Frame helper
+ *********************************************/
+.reveal .r-frame {
+  border: 4px solid var(--r-main-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.reveal a .r-frame {
+  transition: all 0.15s linear;
+}
+
+.reveal a:hover .r-frame {
+  border-color: var(--r-link-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+/*.reveal .controls {
+  color: var(--r-link-color);
+}*/
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+  color: #212121;
+}
+
+/*********************************************
+ * PRINT BACKGROUND
+ *********************************************/
+@media print {
+  .backgrounds {
+    background-color: var(--r-background-color);
+  }
+}
