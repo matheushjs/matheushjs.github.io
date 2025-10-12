@@ -1,5 +1,2 @@
-Thesis Slides
+[Click here for the presentation](/index.html)
 =======
-
-
-I will just use this static website to serve the slides for my thesis predefence and final defence.
