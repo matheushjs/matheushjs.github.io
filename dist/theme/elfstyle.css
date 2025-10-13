@@ -23,7 +23,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 }
 
 .reveal .slide-number {
-  font-size: 24pt; /* Increase font size */
+  font-size: 1.2em; /* Increase font size */
   color: #126262; /* Change text color to white */
   background-color: initial;
   font-family: sans-serif; /* Change font family */
