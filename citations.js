@@ -38,7 +38,8 @@ allCitations = {
     "mantovani2010long": 'Mantovani, E., Viti, M., Babbucci, D., Albarello, D., Cenni, N., & Vannucchi, A. (2010). Long-term earthquake triggering in the Southern and Northern Apennines. Journal of Seismology, 14(1), 53-65.',
     "asencio2016sensitivity": 'Asencio-Cortés, G., Martínez-Álvarez, F., Morales-Esteban, A., & Reyes, J. (2016). A sensitivity study of seismicity indicators in supervised learning to improve earthquake prediction. Knowledge-Based Systems, 101, 15-30.',
     "reyes2013neural": 'Reyes, J., Morales-Esteban, A., & Martínez-Álvarez, F. (2013). Neural networks to predict earthquakes in Chile. Applied Soft Computing, 13(2), 1314-1328.',
-    "panakkat2007neural": 'Panakkat, A., & Adeli, H. (2007). Neural network models for earthquake magnitude prediction using multiple seismicity indicators. International journal of neural systems, 17(01), 13-33.'
+    "panakkat2007neural": 'Panakkat, A., & Adeli, H. (2007). Neural network models for earthquake magnitude prediction using multiple seismicity indicators. International journal of neural systems, 17(01), 13-33.',
+    "hempelmann2012correlation": 'Hempelmann, A., & Weber, W. (2012). Correlation between the sunspot number, the total solar irradiance, and the terrestrial insolation. Solar Physics, 277(2), 417-430.'
 }
 
 makeCitations = function(){
